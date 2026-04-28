@@ -1,6 +1,7 @@
 شرح مبسط للنقاط الاساسية في حل واجب المخزن الدائري Circular Buffer :
-اول فكرة : تهيئة المخزن 
+اول فكرة : تهيئة المخزن
 استخدمت function بسيط مهمتو الاساسية تصفير العداد و مؤشري القراءة و الكتابة 
+
 void init(struct CircularBuffer *cb) {
     cb->head = 0;
     cb->tail = 0;
@@ -9,6 +10,7 @@ void init(struct CircularBuffer *cb) {
 
 تاني فكرة : الادخال ( الكتابة ) 
 استخدمت function ال write بحيث بتضيف حرف جديد بمكان ال tail و قبل ما تضيف بتتاكد اذا المخزن مليان حتى نتجنب ال Overflow 
+
 
 void write(struct CircularBuffer *cb, char data) {
     if (isFull(cb)) {
@@ -22,6 +24,7 @@ void write(struct CircularBuffer *cb, char data) {
 
 تالت فكرة : الإزالة ( القراءة )
 استخدمت function ال read  يلي بتقوم بقراءة الحرف من عند ال head و قبل ما تقرا رح تتاكد اذا المخزن فاضي لتتجنب ال Underflow
+
 
  char read(struct CircularBuffer *cb) {
     if (isEmpty(cb)) {
@@ -37,9 +40,11 @@ void write(struct CircularBuffer *cb, char data) {
 رابع فكرة : حالات امتلاء المخزن / فراغ المخزن 
 عنا ال function هنن isfull و isEmpty بيعتمدو على العداد count و بيقررة بناءا عليه حالة المخزن
 
+
 bool isFull(struct CircularBuffer *cb) {
     return cb->count == SIZE;
 }
+
 
 bool isEmpty(struct CircularBuffer *cb) {
     return cb->count == 0;
